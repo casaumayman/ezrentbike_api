@@ -30,7 +30,14 @@ createConnections().then(async connection => {
     const app = express();
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded());
-    app.use(cors());
+    app.use(
+      cors({
+        origin: "https://ezrentbike.web.app/",
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+        preflightContinue: false,
+        optionsSuccessStatus: 200,
+      })
+    );
 
     const storage = multer.diskStorage({
         destination: (req, file, cb) => {
@@ -71,7 +78,7 @@ createConnections().then(async connection => {
         res.json({ err: err.message });
     });
 
-    const port = normalizePort(process.env.PORT || 2500);
+    const port = normalizePort(process.env.PORT || 3000);
     app.set('port', port);
     const server = http.createServer(app);
     server.listen(port);
