@@ -2,7 +2,6 @@ import "reflect-metadata";
 import { createConnections, FileLogger, Connection, ConnectionOptions } from "typeorm";
 import * as express from "express";
 import { Request, Response } from "express";
-// import { Response } from "express-serve-static-core";
 import bodyParser = require("body-parser");
 import { appRoutes } from "./routes";
 import * as path from 'path';
@@ -32,7 +31,7 @@ createConnections().then(async connection => {
     app.use(bodyParser.urlencoded());
     app.use(
       cors({
-        origin: "https://ezrentbike.web.app/",
+        origin: "*",
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
         preflightContinue: false,
         optionsSuccessStatus: 200,
