@@ -81,5 +81,5 @@ createConnections().then(async connection => {
     app.set('port', port);
     const server = http.createServer(app);
     server.listen(port);
-    console.log('Chay');
+    console.log('running api on port: ' + port);
 }).catch(error => console.log(error));
