@@ -4,6 +4,7 @@
   "description": "Awesome project developed with TypeORM.",
   "devDependencies": {},
   "dependencies": {
+    "@types/node": "8.0.29",
     "cors": "2.8.5",
     "express": "4.16.4",
     "http": "0.0.1-security",
@@ -12,9 +13,9 @@
     "mysql": "2.14.1",
     "path": "0.12.7",
     "reflect-metadata": "0.1.10",
-    "typeorm": "0.2.24",
+    "sqlite3": "^5.0.0",
     "ts-node": "3.3.0",
-    "@types/node": "8.0.29",
+    "typeorm": "0.2.24",
     "typescript": "3.3.3333"
   },
   "scripts": {

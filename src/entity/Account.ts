@@ -16,7 +16,7 @@ export class Account {
     @Column({type: "int"})
     role: number;
 
-    @Column("longtext", {nullable: true})
+    @Column({nullable: true})
     token: string;
 
     @OneToOne(type => Profile)

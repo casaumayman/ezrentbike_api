@@ -6,7 +6,7 @@ export class Feedback{
     @PrimaryGeneratedColumn('uuid')
     id: string;
     
-    @Column("longtext")
+    @Column()
     content: string;
 
     @ManyToOne(type => Account, Account => Account.feedbacks)

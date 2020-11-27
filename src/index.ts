@@ -25,6 +25,8 @@ function normalizePort(val) {
     return false;
 }
 
+console.log("ok con de")
+
 createConnections().then(async connection => {
     const app = express();
     app.use(bodyParser.json());
@@ -34,7 +36,6 @@ createConnections().then(async connection => {
         origin: "*",
         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
         preflightContinue: false,
-        optionsSuccessStatus: 200,
       })
     );
 

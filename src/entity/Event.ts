@@ -18,7 +18,7 @@ export class Event{
     @Column("datetime")
     endTime: string;
 
-    @Column("bit")
+    @Column()
     type: number;
 
     @Column()
