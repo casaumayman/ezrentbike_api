@@ -49,7 +49,7 @@ const register = async (req: Request, res: Response) => {
             email: req.body.email,
             phoneNumber: req.body.phoneNumber,
             address: req.body.address,
-            avatar: ((req.files instanceof Array && req.files.length > 0) ? (req.files[0].filename) : 'default.png')
+            avatar: ((req['files'] instanceof Array && req['files'].length > 0) ? (req['files'][0].filename) : 'default.png')
         });
         await profileRepository.save(newProfile);
         let newUser = userRepository.create({
@@ -80,10 +80,14 @@ const editUser = async (req: Request, res: Response) => {
             profile[key] = req.body[key];
         }
     });
-    if (req.files instanceof Array && req.files.length > 0) {
+    if (req['files'] instanceof Array && req['files'].length > 0) {
         if (profile.avatar !== 'default.png')
-            fs.unlinkSync('./src/asset/avatar/' + profile.avatar);
-        profile.avatar = req.files[0].filename;
+            try {
+                fs.unlinkSync('./src/asset/avatar/' + profile.avatar);
+            } catch (ex) {
+                console.log(ex)
+            }
+        profile.avatar = req['files'][0].filename;
     }
     try {
         profileRepository.save(profile);

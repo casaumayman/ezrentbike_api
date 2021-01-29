@@ -6,6 +6,7 @@ import * as fs from "fs";
 import { Category } from "../entity/Category";
 import { Producer } from "../entity/Producer";
 import { Account } from "../entity/Account";
+import * as moment from 'moment';
 
 const addProduct = async (req: Request, res: Response) => {
     if (!(await verifyToken(req.body.username, req.headers.token)))
@@ -80,9 +81,14 @@ const editProduct = async (req: Request, res: Response) => {
 const listProduct = async (req: Request, res: Response) => {
     const productRepository = getRepository(Product);
     let list = await productRepository.find({
-        relations: ['category', 'producer']
+        relations: ['category', 'producer', 'events']
     });
-    //console.log(list);
+    list.forEach(product => {
+        const listEvent = product.events
+        product.events = listEvent.filter(event => {
+            return moment(event.endTime).isSameOrAfter(moment()) && moment(event.startTime).isSameOrBefore(moment())
+        })
+    })
     res.status(200).json(list);
 }
 
@@ -111,8 +117,12 @@ const getProduct = async (req: Request, res: Response) => {
         where: {
             id: req.body.id
         },
-        relations: ["category", "producer", "leases"]
+        relations: ["category", "producer", "leases", "events"]
     });
+    const listEvent = product.events
+    product.events = listEvent.filter(event => {
+        return moment(event.endTime).isSameOrAfter(moment()) && moment(event.startTime).isSameOrBefore(moment())
+    })
     res.status(200).json(product);
 }
 

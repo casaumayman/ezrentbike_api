@@ -3,6 +3,7 @@ import { listUser, deleteUser, editUser as edit } from "./controller/userControl
 import { listProducer, addLease, getListLease } from "./controller/servicesController";
 import { addProduct, listProduct, deleteProduct, editProduct, getProduct } from "./controller/productController";
 import { addFeedback, listFeedback } from "./controller/feedbackController";
+import { createEvent, getListEvent } from "./controller/eventController";
 
 export const appRoutes = [
     {
@@ -89,5 +90,15 @@ export const appRoutes = [
         path: '/api/get-list-lease',
         method: 'post',
         action: getListLease
+    },
+    {
+        path: '/api/event/create-event',
+        method: 'post',
+        action: createEvent
+    },
+    {
+        path: '/api/event/list-event',
+        method: 'get',
+        action: getListEvent
     },
 ]

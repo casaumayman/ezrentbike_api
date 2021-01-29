@@ -66,7 +66,11 @@ const editUser = async (req: Request, res: Response) => {
     });
     if (req.files instanceof Array && req.files.length > 0) {
         if (profile.avatar !== 'default.png')
-            fs.unlinkSync('./src/asset/avatar/' + profile.avatar);
+            try {
+                fs.unlinkSync('./src/asset/avatar/' + profile.avatar);
+            } catch (ex) {
+                console.log(ex)
+            }
         profile.avatar = req.files[0].filename;
     }
     try {
